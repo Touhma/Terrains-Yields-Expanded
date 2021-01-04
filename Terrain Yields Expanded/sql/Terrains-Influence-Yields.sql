@@ -122,3 +122,36 @@ INSERT OR IGNORE INTO ModifierArguments
 		(ModifierId, Name, Value)
 VALUES	('MOUNTAIN_PROD_BOOST', 'Amount' , 1),
 		('MOUNTAIN_PROD_BOOST', 'YieldType' , 'YIELD_PRODUCTION');
+
+-- try LEU code
+INSERT INTO RequirementSets
+        (RequirementSetId, RequirementSetType)
+VALUES  ('PLOT_HAS_WATER_BOOST_LUA_PROPERTY_REQUIREMENTS', 'REQUIREMENTSET_TEST_ALL');
+-------------------------------------
+-- RequirementSetRequirements
+-------------------------------------    
+INSERT INTO RequirementSetRequirements
+        (RequirementSetId, RequirementId)
+VALUES  ('PLOT_HAS_WATER_BOOST_LUA_PROPERTY_REQUIREMENTS', 'REQUIRE_WATER_BOOST_LUA_PROPERTY');
+-------------------------------------            
+-- Requirements
+-------------------------------------
+INSERT INTO Requirements
+        (RequirementId, RequirementType)
+VALUES  ('REQUIRE_WATER_BOOST_LUA_PROPERTY', 'REQUIREMENT_PLOT_PROPERTY_MATCHES');    
+-------------------------------------            
+-- RequirementArguments
+-------------------------------------
+INSERT INTO RequirementArguments
+        (RequirementId, Name, Value)
+VALUES  ('REQUIRE_WATER_BOOST_LUA_PROPERTY', 'PropertyName', 'WATER_BOOST_LUA_PROPERTY'),
+        ('REQUIRE_WATER_BOOST_LUA_PROPERTY', 'PropertyMinimum', 1);
+
+INSERT OR IGNORE INTO Modifiers
+		(ModifierId, ModifierType,SubjectRequirementSetId)
+VALUES  ('WATER_BOOST_LUA_MODIFIER', 'MODIFIER_GAME_ADJUST_PLOT_YIELD', 'PLOT_HAS_WATER_BOOST_LUA_PROPERTY_REQUIREMENTS');
+
+INSERT OR IGNORE INTO ModifierArguments
+		(ModifierId, Name, Value)
+VALUES	('WATER_BOOST_LUA_MODIFIER', 'Amount' , 5),
+		('WATER_BOOST_LUA_MODIFIER', 'YieldType' , 'YIELD_SCIENCE');

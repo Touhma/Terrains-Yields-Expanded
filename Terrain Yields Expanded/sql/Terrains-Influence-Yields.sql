@@ -90,21 +90,21 @@ VALUES  ('PLOT_IS_COAST_TERRAIN_REQUIREMENTS','PLOT_IS_COASTAL_LAND'),
 -- River , Coast and lakes add some food on adjacents tiles
 INSERT OR IGNORE INTO GameModifiers
 		(ModifierId)
-VALUES	('WATER_FOOD_BOOST');
+VALUES	('WATER_FOOD_BOOST_MODIFIER');
 
 INSERT OR IGNORE INTO Modifiers
 		(ModifierId, ModifierType,SubjectRequirementSetId)
-VALUES	('WATER_FOOD_BOOST', 'MODIFIER_GAME_ADJUST_PLOT_YIELD', 'PLOT_WATER_FOOD_BOOST_REQUIREMENTS');
+VALUES	('WATER_FOOD_BOOST_MODIFIER', 'MODIFIER_GAME_ADJUST_PLOT_YIELD', 'PLOT_WATER_FOOD_BOOST_REQUIREMENTS');
 
 INSERT OR IGNORE INTO ModifierArguments
 		(ModifierId, Name, Value)
-VALUES	('WATER_FOOD_BOOST', 'Amount' , 1),
-		('WATER_FOOD_BOOST', 'YieldType' , 'YIELD_FOOD');
+VALUES	('WATER_FOOD_BOOST_MODIFIER', 'Amount' , 1),
+		('WATER_FOOD_BOOST_MODIFIER', 'YieldType' , 'YIELD_FOOD');
 
 -- Mountain give production on adjacents tiles
 INSERT OR IGNORE INTO GameModifiers
 		(ModifierId)
-VALUES	('MOUNTAIN_PROD_BOOST');
+VALUES	('MOUNTAIN_PROD_BOOST_MODIFIER');
 
 INSERT OR IGNORE INTO RequirementSets
 		(RequirementSetId,RequirementSetType)
@@ -116,9 +116,19 @@ VALUES  ('PLOT_IS_ADJACENT_TO_MOUNTAIN_REQUIREMENTS','REQUIRES_PLOT_ADJACENT_TO_
 
 INSERT OR IGNORE INTO Modifiers
 		(ModifierId, ModifierType,SubjectRequirementSetId, Repeatable)
-VALUES  ('MOUNTAIN_PROD_BOOST', 'MODIFIER_GAME_ADJUST_PLOT_YIELD', 'PLOT_IS_ADJACENT_TO_MOUNTAIN_REQUIREMENTS',0);
+VALUES  ('MOUNTAIN_PROD_BOOST_MODIFIER', 'MODIFIER_GAME_ADJUST_PLOT_YIELD', 'PLOT_IS_ADJACENT_TO_MOUNTAIN_REQUIREMENTS',0);
 
 INSERT OR IGNORE INTO ModifierArguments
 		(ModifierId, Name, Value)
-VALUES	('MOUNTAIN_PROD_BOOST', 'Amount' , 1),
-		('MOUNTAIN_PROD_BOOST', 'YieldType' , 'YIELD_PRODUCTION');
+VALUES	('MOUNTAIN_PROD_BOOST_MODIFIER', 'Amount' , 1),
+		('MOUNTAIN_PROD_BOOST_MODIFIER', 'YieldType' , 'YIELD_PRODUCTION');
+
+
+-- Adding dummy terrain
+INSERT OR IGNORE INTO Terrains 
+		(TerrainType, Name, Mountain, Hills, Water, InfluenceCost, MovementCost, ShallowWater,SightModifier, SightThroughModifier, Impassable, DefenseModifier, Appeal, AntiquityPriority) 
+VALUES	('TERRAIN_GRASS_RIVER', 'LOC_TERRAIN_GRASS_NAME', '0', '0', '0', '1', '1', '0', '0', '0', '0', '0', '0', '2');
+
+INSERT OR IGNORE INTO TerrainClass_Terrains 
+		(TerrainClassType, TerrainType) 
+VALUES	('TERRAIN_CLASS_GRASS', 'TERRAIN_GRASS_RIVER');

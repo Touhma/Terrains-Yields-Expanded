@@ -1,6 +1,6 @@
 -- Not ready for review
 
--- DELETE FROM Feature_AdjacentYields;
+DELETE FROM Feature_AdjacentYields;
 
 -- Natural Wonders 
 --INSERT OR IGNORE INTO Feature_AdjacentYields
